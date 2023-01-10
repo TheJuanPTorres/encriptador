@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-width">
+
+        <title>Encriptador de Texto</title>
+
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/index.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+        <main>
+            <div class="main">
+
+                <div class="img-logo">
+                    <img class="logo" id="img" src="assets/logo_JP.png" alt="Logo de JuanP">
+                </div>
+                
+                <div class="text-form">
+
+                    <form class="form">
+                        <textarea cols="100" rows="13" id="box" placeholder="Ingrese el texto aquí ..." required></textarea>
+
+                        <div class="not-form-text">
+                            <img class="img-form-text" src="assets/exclamation.svg" alt="Nota">
+                            <p class="nota">Solo letras minúsculas y sin acentos.</p>
+                        </div>
+                        <div class="bot-form-text">
+                            <input class="encriptar" type="submit" value="Encriptar">
+                            <input class="desencriptar" type="submit" value="Desencriptar">
+                        </div>
+                    </form>
+
+                </div>
+            
+                <div class="text-result">
+
+                    <div class="area-result">
+                        
+                    </div>
+
+                </div>
+                
+            </div>
+            
+        
+        </main>
+
+        <footer>
+
+        </footer>
+
+        <script>
+
+            let p = document.getElementById("img");
+            p.onclick = click;
+
+            function click() {
+                alert("Mensaje");
+            }
+
+        </script>
+
+    </body>
+
+</html>
