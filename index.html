@@ -16,6 +16,8 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
 
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script> 
+
     </head>
 
     <body>
@@ -30,7 +32,7 @@
                 <div class="text-form">
 
                     <form class="form">
-                        <textarea cols="100" rows="13" id="box" placeholder="Ingrese el texto aquí ..." required></textarea>
+                        <textarea cols="100" rows="13" id="box" maxlength="715" placeholder="Ingrese el texto aquí ..." required></textarea>
 
                         <div class="not-form-text">
                             <img class="img-form-text" src="assets/exclamation.svg" alt="Nota">
@@ -47,7 +49,12 @@
                 <div class="text-result">
 
                     <div class="area-result">
-                        
+                    
+                        <lottie-player src="https://lottie.host/d2c3106d-f91f-4815-aede-3dc76f8549c3/VdmYXopwYv.json" background="transparent" speed="1" style="width: 100%; height: 70%;" loop autoplay></lottie-player>
+                    
+                        <p class="note-result-1">Ningún mensaje fue encontrado</p>
+                        <p class="note-result-2">Ingresa el texto que desees encriptar o desencriptar.</p>
+
                     </div>
 
                 </div>
