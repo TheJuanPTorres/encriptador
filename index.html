@@ -39,8 +39,8 @@
                             <p class="nota">Solo letras minúsculas y sin acentos.</p>
                         </div>
                         <div class="bot-form-text">
-                            <input class="encriptar" type="submit" value="Encriptar">
-                            <input class="desencriptar" type="submit" value="Desencriptar">
+                            <input class="encriptar" id="encriptar" type="submit" value="Encriptar">
+                            <input class="desencriptar" id="desencriptar" type="submit" value="Desencriptar">
                         </div>
                     </form>
 
@@ -49,6 +49,8 @@
                 <div class="text-result">
 
                     <div class="area-result">
+
+                        <p id="result"></p>
                     
                         <lottie-player src="https://lottie.host/d2c3106d-f91f-4815-aede-3dc76f8549c3/VdmYXopwYv.json" background="transparent" speed="1" style="width: 100%; height: 70%;" loop autoplay></lottie-player>
                     
@@ -64,18 +66,37 @@
         
         </main>
 
-        <footer>
-
-        </footer>
-
         <script>
 
-            let p = document.getElementById("img");
-            p.onclick = click;
+            var textForm = document.getElementById("box").value;
+            
+            let button = document.getElementById("encriptar");
 
-            function click() {
-                alert("Mensaje");
+            //Encriptar
+
+            function encriptar(string) {
+                string = string.replace("e", "enter");
+                string = string.replace("i", "imes");
+                string = string.replace("a", "ai");
+                string = string.replace("o", "ober");
+                string = string.replace("u", "ufat");
+
+                return string;
             }
+
+            //Funcionalidad de Captura
+
+            button.onclick = function capturar() {
+                let newText = encriptar(textForm);
+            }
+
+            //Pasando a HTML
+
+            var stringToHTML = function (str) {
+	            var dom = document.createElement('div');
+	            dom.innerHTML = str;
+	            return dom;
+            };
 
         </script>
 
