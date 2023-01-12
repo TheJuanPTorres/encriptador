@@ -16,6 +16,8 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
 
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script> 
+
     </head>
 
     <body>
@@ -30,15 +32,15 @@
                 <div class="text-form">
 
                     <form class="form">
-                        <textarea cols="100" rows="13" id="box" placeholder="Ingrese el texto aquí ..." required></textarea>
+                        <textarea cols="100" rows="13" id="box" maxlength="715" placeholder="Ingrese el texto aquí ..." required></textarea>
 
                         <div class="not-form-text">
                             <img class="img-form-text" src="assets/exclamation.svg" alt="Nota">
                             <p class="nota">Solo letras minúsculas y sin acentos.</p>
                         </div>
                         <div class="bot-form-text">
-                            <input class="encriptar" type="submit" value="Encriptar">
-                            <input class="desencriptar" type="submit" value="Desencriptar">
+                            <input class="encriptar" id="encriptar" type="submit" value="Encriptar">
+                            <input class="desencriptar" id="desencriptar" type="submit" value="Desencriptar">
                         </div>
                     </form>
 
@@ -46,8 +48,13 @@
             
                 <div class="text-result">
 
-                    <div class="area-result">
-                        
+                    <div class="area-result" id="area-result">
+                    
+                        <lottie-player src="https://lottie.host/d2c3106d-f91f-4815-aede-3dc76f8549c3/VdmYXopwYv.json" background="transparent" speed="1" style="width: 100%; height: 60%;" loop autoplay></lottie-player>
+                    
+                        <p class="note-result-1">Ningún mensaje fue encontrado</p>
+                        <p class="note-result-2">Ingresa el texto que desees encriptar o desencriptar.</p>
+
                     </div>
 
                 </div>
@@ -57,18 +64,95 @@
         
         </main>
 
-        <footer>
-
-        </footer>
-
         <script>
 
-            let p = document.getElementById("img");
-            p.onclick = click;
+            let butEncriptado = document.getElementById("encriptar");
+            let butDesencriptado = document.getElementById("desencriptar");
 
-            function click() {
-                alert("Mensaje");
+            butEncriptado.onclick = capturarenc;
+            butDesencriptado.onclick = capturardes;
+
+            function capturarenc(event) {
+                event.preventDefault();
+                var textForm = document.getElementById('box').value;
+
+                if(filtrar(textForm)){
+                    document.getElementById("area-result").innerHTML = "<textarea class='text-encriptado' id='text-encriptado'>" + encriptar(textForm) + "</textarea><input class='copiar' onclick='copiar()' type='submit' value='Copiar'>"; 
+                } else {
+                    alert("Error");
+                }   
             }
+
+            function capturardes(event) {
+                event.preventDefault();
+                var textForm = document.getElementById('box').value;
+
+                if(filtrar(textForm)){
+                    document.getElementById("area-result").innerHTML = "<textarea class='text-encriptado' id='text-encriptado'>" + desencriptar(textForm) + "</textarea><input class='copiar' onclick='copiar()' type='submit' value='Copiar'>"; 
+                } else {
+                    alert("Error");
+                }   
+            }
+            
+            
+            //Funcion filtrar: Se cumple con los requisitos de captura de texto (solo minúsculas, sin acentos ni caracteres especiales)
+
+            function filtrar(string){
+
+                let filtro = /^[a-z0-9!@#\$%\^&\*\s]+$/;
+
+                if(filtro.test(string)){
+                    return true;
+                }
+                return false;
+            }   
+                 
+
+            //Funcion encriptar: Usando el método replace con el parametro "g" (global) y "i" (ignore case)
+
+            function encriptar(string) {
+
+                let re = /e/gi;
+                string = string.replace(re, "enter");
+                re = /i/gi;
+                string = string.replace(re, "imes");
+                re = /a/gi;
+                string = string.replace(re, "ai");
+                re = /o/gi;
+                string = string.replace(re, "ober");
+                re = /u/gi;
+                string = string.replace(re, "ufat");
+
+                return string;
+            }
+
+            //Funcion desencriptar: 
+
+            function desencriptar(string) {
+
+                let re = /enter/gi;
+                string = string.replace(re, "e");
+                re = /imes/gi;
+                string = string.replace(re, "i");
+                re = /ai/gi;
+                string = string.replace(re, "a");
+                re = /ober/gi;
+                string = string.replace(re, "o");
+                re = /ufat/gi;
+                string = string.replace(re, "u");
+
+                return string;
+            }
+
+            //Función copiar: 
+
+            function copiar() {
+                let textarea = document.getElementById("text-encriptado");
+                textarea.select();
+                document.execCommand("copy");
+                alert("Texto copiado al portapapeles");
+            }
+
 
         </script>
 
