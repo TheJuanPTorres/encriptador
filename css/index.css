@@ -115,6 +115,11 @@ body {
 
 /* Área del resultado */
 
+.area-result { 
+    font-size: 20px;
+    padding: 10px 0 0 0;
+}
+
 .note-result-1 {
     color: var(--main-bg-color-1);
     font-weight: bold;
@@ -125,4 +130,35 @@ body {
 .note-result-2 {
     padding: 15px 0 0 0;
     color: #5e5e5e;
+    font-size: 18px;
 }
+
+/* Área dek texto encriptado */
+
+.text-encriptado {
+    background-color: var(--main-bg-color-4);
+    color: var(--main-bg-color-1);
+    width: 90%;
+    height: 80%;
+    border: none;
+    resize: none;
+    outline: none;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 17px;
+    padding: 10px 0 0 0;
+}
+
+.copiar {
+    background-color: var(--main-bg-color-4);
+    color: var(--main-bg-color-1);
+    border: 1px solid var(--main-bg-color-1);
+    border-radius: 20px;
+    width: 80%;
+    padding: 15px 32px;
+    margin: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    font-family: 'Ubuntu', sans-serif;
+} 

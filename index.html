@@ -48,11 +48,9 @@
             
                 <div class="text-result">
 
-                    <div class="area-result">
-
-                        <p id="result"></p>
+                    <div class="area-result" id="area-result">
                     
-                        <lottie-player src="https://lottie.host/d2c3106d-f91f-4815-aede-3dc76f8549c3/VdmYXopwYv.json" background="transparent" speed="1" style="width: 100%; height: 70%;" loop autoplay></lottie-player>
+                        <lottie-player src="https://lottie.host/d2c3106d-f91f-4815-aede-3dc76f8549c3/VdmYXopwYv.json" background="transparent" speed="1" style="width: 100%; height: 60%;" loop autoplay></lottie-player>
                     
                         <p class="note-result-1">Ningún mensaje fue encontrado</p>
                         <p class="note-result-2">Ingresa el texto que desees encriptar o desencriptar.</p>
@@ -68,35 +66,93 @@
 
         <script>
 
-            var textForm = document.getElementById("box").value;
-            
-            let button = document.getElementById("encriptar");
+            let butEncriptado = document.getElementById("encriptar");
+            let butDesencriptado = document.getElementById("desencriptar");
 
-            //Encriptar
+            butEncriptado.onclick = capturarenc;
+            butDesencriptado.onclick = capturardes;
+
+            function capturarenc(event) {
+                event.preventDefault();
+                var textForm = document.getElementById('box').value;
+
+                if(filtrar(textForm)){
+                    document.getElementById("area-result").innerHTML = "<textarea class='text-encriptado' id='text-encriptado'>" + encriptar(textForm) + "</textarea><input class='copiar' onclick='copiar()' type='submit' value='Copiar'>"; 
+                } else {
+                    alert("Error");
+                }   
+            }
+
+            function capturardes(event) {
+                event.preventDefault();
+                var textForm = document.getElementById('box').value;
+
+                if(filtrar(textForm)){
+                    document.getElementById("area-result").innerHTML = "<textarea class='text-encriptado' id='text-encriptado'>" + desencriptar(textForm) + "</textarea><input class='copiar' onclick='copiar()' type='submit' value='Copiar'>"; 
+                } else {
+                    alert("Error");
+                }   
+            }
+            
+            
+            //Funcion filtrar: Se cumple con los requisitos de captura de texto (solo minúsculas, sin acentos ni caracteres especiales)
+
+            function filtrar(string){
+
+                let filtro = /^[a-z0-9!@#\$%\^&\*\s]+$/;
+
+                if(filtro.test(string)){
+                    return true;
+                }
+                return false;
+            }   
+                 
+
+            //Funcion encriptar: Usando el método replace con el parametro "g" (global) y "i" (ignore case)
 
             function encriptar(string) {
-                string = string.replace("e", "enter");
-                string = string.replace("i", "imes");
-                string = string.replace("a", "ai");
-                string = string.replace("o", "ober");
-                string = string.replace("u", "ufat");
+
+                let re = /e/gi;
+                string = string.replace(re, "enter");
+                re = /i/gi;
+                string = string.replace(re, "imes");
+                re = /a/gi;
+                string = string.replace(re, "ai");
+                re = /o/gi;
+                string = string.replace(re, "ober");
+                re = /u/gi;
+                string = string.replace(re, "ufat");
 
                 return string;
             }
 
-            //Funcionalidad de Captura
+            //Funcion desencriptar: 
 
-            button.onclick = function capturar() {
-                let newText = encriptar(textForm);
+            function desencriptar(string) {
+
+                let re = /enter/gi;
+                string = string.replace(re, "e");
+                re = /imes/gi;
+                string = string.replace(re, "i");
+                re = /ai/gi;
+                string = string.replace(re, "a");
+                re = /ober/gi;
+                string = string.replace(re, "o");
+                re = /ufat/gi;
+                string = string.replace(re, "u");
+
+                return string;
             }
 
-            //Pasando a HTML
+            //Función copiar: 
 
-            var stringToHTML = function (str) {
-	            var dom = document.createElement('div');
-	            dom.innerHTML = str;
-	            return dom;
-            };
+            function copiar() {
+                let textarea = document.getElementById("text-encriptado");
+                textarea.select();
+                document.execCommand("copy");
+                alert("Texto copiado al portapapeles");
+            }
+
 
         </script>
 
