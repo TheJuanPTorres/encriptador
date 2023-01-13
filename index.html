@@ -28,13 +28,14 @@
                 <div class="img-logo">
                     <img class="logo" id="img" src="assets/logo_JP.png" alt="Logo de JuanP">
                 </div>
-                
+            
                 <div class="text-form">
 
                     <form class="form">
+                        
                         <textarea cols="100" rows="13" id="box" maxlength="715" placeholder="Ingrese el texto aquí ..." required></textarea>
 
-                        <div class="not-form-text">
+                        <div class="not-form-text" id="img-form-text">
                             <img class="img-form-text" src="assets/exclamation.svg" alt="Nota">
                             <p class="nota">Solo letras minúsculas y sin acentos.</p>
                         </div>
@@ -66,20 +67,23 @@
 
         <script>
 
-            let butEncriptado = document.getElementById("encriptar");
-            let butDesencriptado = document.getElementById("desencriptar");
+            const textFormulario = document.getElementById("box");
+            const butEncriptado = document.getElementById("encriptar");
+            const butDesencriptado = document.getElementById("desencriptar");
 
             butEncriptado.onclick = capturarenc;
             butDesencriptado.onclick = capturardes;
+
+            
 
             function capturarenc(event) {
                 event.preventDefault();
                 var textForm = document.getElementById('box').value;
 
                 if(filtrar(textForm)){
-                    document.getElementById("area-result").innerHTML = "<textarea class='text-encriptado' id='text-encriptado'>" + encriptar(textForm) + "</textarea><input class='copiar' onclick='copiar()' type='submit' value='Copiar'>"; 
+                    document.getElementById("area-result").innerHTML = "<textarea class='text-encriptado' id='text-encriptado'>" + encriptar(textForm) + "</textarea><lottie-player src='https://lottie.host/571d7afa-1a14-4423-aebd-5b549c5d514a/gB2vk9QuAb.json' background='transparent' speed='1' style='width: 300px; height: 300px; z-index: 0;' autoplay></lottie-player><input class='copiar' onclick='copiar()' type='submit' value='Copiar'>"; 
                 } else {
-                    alert("Error");
+
                 }   
             }
 
@@ -88,7 +92,7 @@
                 var textForm = document.getElementById('box').value;
 
                 if(filtrar(textForm)){
-                    document.getElementById("area-result").innerHTML = "<textarea class='text-encriptado' id='text-encriptado'>" + desencriptar(textForm) + "</textarea><input class='copiar' onclick='copiar()' type='submit' value='Copiar'>"; 
+                    document.getElementById("area-result").innerHTML = "<textarea class='text-encriptado' id='text-encriptado'>" + desencriptar(textForm) + "</textarea><lottie-player src='https://lottie.host/571d7afa-1a14-4423-aebd-5b549c5d514a/gB2vk9QuAb.json' background='transparent' speed='1' style='width: 300px; height: 300px; z-index: 0;' autoplay></lottie-player><input class='copiar' onclick='copiar()' type='submit' value='Copiar'>"; 
                 } else {
                     alert("Error");
                 }   
@@ -97,17 +101,26 @@
             
             //Funcion filtrar: Se cumple con los requisitos de captura de texto (solo minúsculas, sin acentos ni caracteres especiales)
 
+            textFormulario.addEventListener("input", function() {
+                let filtro = /^[a-z0-9!ñ@#\$%\^&\*\s]+$/;
+
+                if(!filtro.test(textFormulario.value) && textFormulario.value !== ""){
+                    document.getElementById("img-form-text").innerHTML = '<lottie-player src="https://assets5.lottiefiles.com/packages/lf20_p7ki6kij.json"  background="transparent"  speed="3"  style="width: 30px; height: 30px;" loop autoplay></lottie-player><p class="nota-alert">Solo letras minúsculas y sin acentos.</p>'
+                } else {
+                    document.getElementById("img-form-text").innerHTML = '<img class="img-form-text" src="assets/exclamation.svg" alt="Nota"><p class="nota">Solo letras minúsculas y sin acentos.</p>';
+                }
+            });
+
             function filtrar(string){
 
-                let filtro = /^[a-z0-9!@#\$%\^&\*\s]+$/;
+                let filtro = /^[a-z0-9!ñ@#\$%\^&\*\s]+$/;
 
-                if(filtro.test(string)){
+                if(filtro.test(string) && string !== ""){
                     return true;
                 }
                 return false;
-            }   
-                 
-
+            }
+            
             //Funcion encriptar: Usando el método replace con el parametro "g" (global) y "i" (ignore case)
 
             function encriptar(string) {
